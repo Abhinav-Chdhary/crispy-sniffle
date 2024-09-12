@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
+import "./GameOver.css";
 
 export default function GameOver({
   width,
@@ -8,7 +9,7 @@ export default function GameOver({
   newHighScore,
   score,
 }) {
-  const { auth } = useAuth();
+  const { auth, login } = useAuth();
   const username = auth.user.username;
 
   const handleUpdateHighScore = async () => {
@@ -25,19 +26,23 @@ export default function GameOver({
       );
       const data = await response.json();
       if (data.success) console.log("High Score Updated");
+      login({ username, highScore });
     } catch (error) {
       console.log("Failed Update");
     }
   };
-  if (newHighScore) {
-    handleUpdateHighScore();
-  }
+  useEffect(() => {
+    if (newHighScore) {
+      handleUpdateHighScore();
+    }
+  }, [newHighScore]);
+
   return (
     <div className='GameOver' style={{ width, height }}>
       <h1>Game Over</h1>
       <p>Your score: {score}</p>
       {newHighScore && <p>New high score: {highScore}!</p>}
-      Press Space to play again
+      <p>Press Space to play again</p>
     </div>
   );
 }

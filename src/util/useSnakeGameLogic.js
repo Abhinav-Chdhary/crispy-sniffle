@@ -9,7 +9,7 @@ export function useSnakeGameLogic(
   percentageWidth = 40,
   startSnakeSize = 6
 ) {
-  const {auth} = useAuth();
+  const { auth } = useAuth();
   const [state, setState] = useState({
     width: 0,
     height: 0,
@@ -146,7 +146,6 @@ export function useSnakeGameLogic(
         if (newScore > prevState.highScore) {
           newHighScore = newScore;
           isNewHighScore = true;
-          localStorage.setItem("snakeHighScore", newHighScore);
           celebrateConfetti();
         }
 
