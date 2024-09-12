@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { useAuth } from "../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
+export default function SignUpPage() {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const { login } = useAuth();
   const navigate = useNavigate();
 
   // Helper function to validate email
@@ -16,11 +15,16 @@ const LoginPage = () => {
 
   const validateForm = () => {
     const newErrors = {};
-
     if (!email) {
       newErrors.email = "Email is required.";
     } else if (!isValidEmail(email)) {
       newErrors.email = "Invalid email format.";
+    }
+
+    if (!username) {
+      newErrors.username = "Username is required.";
+    } else if (username.length < 3) {
+      newErrors.username = "Username must be at least 3 characters long.";
     }
 
     if (!password) {
@@ -33,7 +37,7 @@ const LoginPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleLogin = async (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
 
     // Perform validation before submitting the form
@@ -42,31 +46,31 @@ const LoginPage = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/userLogin", {
+      const response = await fetch("http://localhost:5000/api/addNewUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, username, password }),
       });
 
       const data = await response.json();
-      if (data && data.success) {
-        const { _, username, highScore } = data;
-        //console.log(username, highScore);
-        login({ username, highScore });
-        navigate("/game");
+      if (data.success) {
+        console.log("Sign up successful");
+        navigate("/");
       } else {
-        alert("Invalid Credentials");
-        console.error("Login failed: Invalid credentials");
+        if (data.message === "duplicate key error") {
+          alert("Use a different username/email Id");
+        }
+        console.error("Sign Up failed");
       }
     } catch (error) {
-      console.error("Login failed:", error);
+      console.error("Error occurred:", error);
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleSignUp}>
       <label>
         Email:
         <input
@@ -77,6 +81,18 @@ const LoginPage = () => {
         />
         {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
       </label>
+
+      <label>
+        Username:
+        <input
+          type='text'
+          id='username'
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
+      </label>
+
       <label>
         Password:
         <input
@@ -87,12 +103,8 @@ const LoginPage = () => {
         />
         {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
       </label>
-      <button type='submit'>Login</button>
-      <p>
-        Don't have an account? <Link to={"/signup"}>Sign Up</Link>
-      </p>
+
+      <button type='submit'>Submit</button>
     </form>
   );
-};
-
-export default LoginPage;
+}

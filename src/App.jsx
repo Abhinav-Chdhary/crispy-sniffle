@@ -6,6 +6,7 @@ import About from "../pages/About";
 import { AuthProvider } from "../context/AuthContext";
 import LoginPage from "../pages/LoginPage";
 import PrivateRoute from "../components/PrivateRoute";
+import SignUpPage from "../pages/SignUpPage";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <AuthProvider>
         <Routes>
           <Route path='/' element={<LoginPage />} />
+          <Route path='/signup' element={<SignUpPage />} />
           <Route path='/game' element={<PrivateRoute component={GamePage} />} />
           <Route
             path='/leaderboard'
