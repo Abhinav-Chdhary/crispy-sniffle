@@ -12,9 +12,8 @@ mongoDB()
   });
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+// to create a new user
+app.use("/api", require("./Routes/createNewUser"));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
