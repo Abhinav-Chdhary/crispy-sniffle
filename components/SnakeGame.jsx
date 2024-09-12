@@ -1,9 +1,14 @@
-import React from 'react';
-import './SnakeGame.css';
-import GameOver from './GameOver';
-import { useSnakeGameLogic } from '../util/useSnakeGameLogic';
+import React from "react";
+import "./SnakeGame.css";
+import GameOver from "./GameOver";
+import { useSnakeGameLogic } from "../util/useSnakeGameLogic";
 
-function SnakeGame({ snakeColor, appleColor, percentageWidth, startSnakeSize }) {
+function SnakeGame({
+  snakeColor,
+  appleColor,
+  percentageWidth,
+  startSnakeSize,
+}) {
   const {
     width,
     height,
@@ -15,15 +20,20 @@ function SnakeGame({ snakeColor, appleColor, percentageWidth, startSnakeSize }) 
     highScore,
     newHighScore,
     isGameOver,
-    handleKeyDown
-  } = useSnakeGameLogic(snakeColor, appleColor, percentageWidth, startSnakeSize);
+    handleKeyDown,
+  } = useSnakeGameLogic(
+    snakeColor,
+    appleColor,
+    percentageWidth,
+    startSnakeSize
+  );
 
   // Effect to handle keyboard input
   React.useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [handleKeyDown]);
 
@@ -43,37 +53,37 @@ function SnakeGame({ snakeColor, appleColor, percentageWidth, startSnakeSize }) 
   // Render the game board
   return (
     <div
-      id="GameBoard"
+      id='GameBoard'
       style={{
         width: width,
         height: height,
-        borderWidth: width / 50
+        borderWidth: width / 50,
       }}
     >
       {snake.map((snakePart, index) => (
         <div
           key={index}
-          className="Block"
+          className='Block'
           style={{
             width: blockWidth,
             height: blockHeight,
             left: snakePart.Xpos,
             top: snakePart.Ypos,
-            backgroundColor: snakeColor
+            backgroundColor: snakeColor,
           }}
         />
       ))}
       <div
-        className="Block"
+        className='Block'
         style={{
           width: blockWidth,
           height: blockHeight,
           left: apple.Xpos,
           top: apple.Ypos,
-          backgroundColor: appleColor
+          backgroundColor: appleColor,
         }}
       />
-      <div id="Score" style={{ fontSize: width / 20 }}>
+      <div id='Score' style={{ fontSize: width / 20 }}>
         HIGH-SCORE: {highScore} &emsp; SCORE: {score}
       </div>
     </div>

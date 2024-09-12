@@ -1,6 +1,7 @@
-import confetti from "canvas-confetti";
 import { useState, useCallback, useEffect } from "react";
 import { celebrateConfetti } from "./celebrateConfetti";
+
+import { useAuth } from "../context/AuthContext";
 
 export function useSnakeGameLogic(
   snakeColor,
@@ -8,6 +9,7 @@ export function useSnakeGameLogic(
   percentageWidth = 40,
   startSnakeSize = 6
 ) {
+  const {auth} = useAuth();
   const [state, setState] = useState({
     width: 0,
     height: 0,
@@ -23,7 +25,7 @@ export function useSnakeGameLogic(
     snakeColor: snakeColor,
     appleColor: appleColor,
     score: 0,
-    highScore: Number(localStorage.getItem("snakeHighScore")) || 0,
+    highScore: auth.user.highScore,
     newHighScore: false,
   });
 

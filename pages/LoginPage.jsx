@@ -20,9 +20,9 @@ const LoginPage = () => {
       });
 
       const data = await response.json();
-      console.log(data);
       if (data && data.success) {
         const { _, username, highScore } = data;
+        console.log(username, highScore);
         login({ username, highScore });
         navigate("/game");
       } else {

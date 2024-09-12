@@ -26,6 +26,8 @@ app.use(express.json());
 app.use("/api", require("./Routes/createNewUser"));
 // login a user
 app.use("/api", require("./Routes/loginUser"));
+// update high score
+app.use("/api", require("./Routes/updateHighScore"));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
