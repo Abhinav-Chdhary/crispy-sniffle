@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import GamePage from "../pages/GamePage";
-import LeaderBoard from "../pages/LeaderBoard";
-import About from "../pages/About";
-import { AuthProvider } from "../context/AuthContext";
-import LoginPage from "../pages/LoginPage";
-import PrivateRoute from "../components/PrivateRoute";
-import SignUpPage from "../pages/SignUpPage";
+import GamePage from "../src/pages/GamePage";
+import LeaderBoard from "../src/pages/LeaderBoard";
+import About from "../src/pages/About";
+import { AuthProvider } from "../src/context/AuthContext";
+import LoginPage from "../src/pages/LoginPage";
+import PrivateRoute from "../src/components/PrivateRoute";
+import SignUpPage from "../src/pages/SignUpPage";
 
 export default function App() {
   return (

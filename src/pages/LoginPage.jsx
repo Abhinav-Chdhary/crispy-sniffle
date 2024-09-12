@@ -67,7 +67,7 @@ const LoginPage = () => {
 
   return (
     <form onSubmit={handleLogin}>
-      <label>
+      <label className="bg-red-700">
         Email:
         <input
           type='email'
