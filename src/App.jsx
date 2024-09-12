@@ -3,19 +3,24 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GamePage from "../pages/GamePage";
 import LeaderBoard from "../pages/LeaderBoard";
 import About from "../pages/About";
-import Navigation from "../components/Navigation";
+import { AuthProvider } from "../context/AuthContext";
+import LoginPage from "../pages/LoginPage";
+import PrivateRoute from "../components/PrivateRoute";
 
 export default function App() {
   return (
     <Router>
-      <div>
-        <Navigation/>
+      <AuthProvider>
         <Routes>
-          <Route path='/' element={<GamePage />} />
-          <Route path='/leaderboard' element={<LeaderBoard />} />
-          <Route path='/about' element={<About />} />
+          <Route path='/' element={<LoginPage />} />
+          <Route path='/game' element={<PrivateRoute component={GamePage} />} />
+          <Route
+            path='/leaderboard'
+            element={<PrivateRoute component={LeaderBoard} />}
+          />
+          <Route path='/about' element={<PrivateRoute component={About} />} />
         </Routes>
-      </div>
+      </AuthProvider>
     </Router>
   );
 }

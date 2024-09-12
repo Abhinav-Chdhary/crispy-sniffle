@@ -1,7 +1,10 @@
-import React from 'react'
+import Navigation from "../components/Navigation";
 
 export default function LeaderBoard() {
   return (
-    <div>LeaderBoard</div>
-  )
+    <>
+      <Navigation />
+      <div>LeaderBoard</div>
+    </>
+  );
 }
