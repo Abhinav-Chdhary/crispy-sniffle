@@ -6,6 +6,7 @@ function GameOver({ width, height, highScore, newHighScore, score }) {
       <h1>Game Over</h1>
       <p>Your score: {score}</p>
       {newHighScore && <p>New high score: {highScore}!</p>}
+      Press Space to play again
     </div>
   );
 }

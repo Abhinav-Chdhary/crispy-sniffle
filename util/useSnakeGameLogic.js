@@ -1,4 +1,6 @@
+import confetti from "canvas-confetti";
 import { useState, useCallback, useEffect } from "react";
+import { celebrateConfetti } from "./celebrateConfetti";
 
 export function useSnakeGameLogic(
   snakeColor,
@@ -143,6 +145,7 @@ export function useSnakeGameLogic(
           newHighScore = newScore;
           isNewHighScore = true;
           localStorage.setItem("snakeHighScore", newHighScore);
+          celebrateConfetti();
         }
 
         return {
