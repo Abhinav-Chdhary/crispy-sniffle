@@ -2,16 +2,20 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const mongoDB = require("./db");
+const cors = require("cors");
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE"); // Include the allowed methods
-  next();
-});
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://your-frontend.netlify.app",
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
+  })
+);
 
 mongoDB()
   .then(() => {
