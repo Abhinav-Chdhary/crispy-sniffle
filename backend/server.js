@@ -6,7 +6,7 @@ const cors = require("cors");
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://your-frontend.netlify.app",
+  "https://crispy-sniffle.netlify.app/",
 ];
 
 app.use(
