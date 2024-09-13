@@ -9,9 +9,9 @@ export default function GamePage() {
   return (
     <>
       <Navigation />
-      <p style={{ fontSize: "20px", textAlign: "center" }}>
+      <h1>
         Username {auth.user.username}
-      </p>
+      </h1>
       <SnakeGame
         snakeColor='green'
         appleColor='red'

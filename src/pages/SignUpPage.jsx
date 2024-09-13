@@ -71,41 +71,44 @@ export default function SignUpPage() {
   };
 
   return (
-    <form onSubmit={handleSignUp}>
-      <label>
-        Email:
-        <input
-          type='email'
-          id='email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
-      </label>
+    <>
+      <h1>SIGN UP</h1>
+      <form onSubmit={handleSignUp}>
+        <label>
+          Email:
+          <input
+            type='email'
+            id='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+        </label>
 
-      <label>
-        Username:
-        <input
-          type='text'
-          id='username'
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
-      </label>
+        <label>
+          Username:
+          <input
+            type='text'
+            id='username'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
+        </label>
 
-      <label>
-        Password:
-        <input
-          type='password'
-          id='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
-      </label>
+        <label>
+          Password:
+          <input
+            type='password'
+            id='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
+        </label>
 
-      <button type='submit'>Submit</button>
-    </form>
+        <button type='submit'>Submit</button>
+      </form>
+    </>
   );
 }

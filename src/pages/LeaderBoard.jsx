@@ -4,7 +4,7 @@ export default function LeaderBoard() {
   return (
     <>
       <Navigation />
-      <div>LeaderBoard</div>
+      <h1>LeaderBoard</h1>
     </>
   );
 }

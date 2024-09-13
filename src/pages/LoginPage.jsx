@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import "./LoginPage.css"
+import "./LoginPage.css";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const LoginPage = () => {
@@ -68,32 +68,35 @@ const LoginPage = () => {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <label className="">
-        Email:
-        <input
-          type='email'
-          id='email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
-      </label>
-      <label>
-        Password:
-        <input
-          type='password'
-          id='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
-      </label>
-      <button type='submit'>Login</button>
-      <p>
-        Don't have an account? <Link to={"/signup"}>Sign Up</Link>
-      </p>
-    </form>
+    <>
+      <h1>LOGIN</h1>
+      <form onSubmit={handleLogin}>
+        <label>
+          Email:
+          <input
+            type='email'
+            id='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+        </label>
+        <label>
+          Password:
+          <input
+            type='password'
+            id='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
+        </label>
+        <button type='submit'>Login</button>
+        <p>
+          Don't have an account? <Link to={"/signup"}>Sign Up</Link>
+        </p>
+      </form>
+    </>
   );
 };
 

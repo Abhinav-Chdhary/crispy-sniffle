@@ -7,11 +7,13 @@ import { AuthProvider } from "../src/context/AuthContext";
 import LoginPage from "../src/pages/LoginPage";
 import PrivateRoute from "../src/components/PrivateRoute";
 import SignUpPage from "../src/pages/SignUpPage";
+import TopBanner from "./components/TopBanner";
 
 export default function App() {
   return (
     <Router>
       <AuthProvider>
+        <TopBanner/>
         <Routes>
           <Route path='/' element={<LoginPage />} />
           <Route path='/signup' element={<SignUpPage />} />
