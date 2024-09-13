@@ -41,6 +41,8 @@ app.use("/api", require("./Routes/loginUser"));
 app.use("/api", require("./Routes/updateHighScore"));
 // validate token
 app.use("/api", require("./Routes/validateToken"));
+// get leader board
+app.use("/api", require("./Routes/leaderboardList"));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
