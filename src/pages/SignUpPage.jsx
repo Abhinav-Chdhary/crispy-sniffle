@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("");
@@ -46,7 +47,7 @@ export default function SignUpPage() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/addNewUser", {
+      const response = await fetch(`${apiUrl}/api/addNewUser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

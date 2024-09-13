@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginPage.css"
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -43,7 +44,7 @@ const LoginPage = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/userLogin", {
+      const response = await fetch(`${apiUrl}/api/userLogin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import "./GameOver.css";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function GameOver({
   width,
@@ -14,16 +15,13 @@ export default function GameOver({
 
   const handleUpdateHighScore = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/updateHighScore",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, highScore }),
-        }
-      );
+      const response = await fetch(`${apiUrl}/api/updateHighScore`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, highScore }),
+      });
       const data = await response.json();
       if (data.success) console.log("High Score Updated");
       login({ username, highScore });
