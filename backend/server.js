@@ -13,7 +13,14 @@ app.use(
   cors({
     origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
+    allowedHeaders: [
+      "Origin",
+      "X-Requested-With",
+      "Content-Type",
+      "Accept",
+      "Authorization",
+    ],
+    credentials: true,
   })
 );
 
@@ -32,6 +39,8 @@ app.use("/api", require("./Routes/createNewUser"));
 app.use("/api", require("./Routes/loginUser"));
 // update high score
 app.use("/api", require("./Routes/updateHighScore"));
+// validate token
+app.use("/api", require("./Routes/validateToken"));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
+require("dotenv").config();
 const User = require("../Models/userSchema");
 const { body, validationResult } = require("express-validator");
+const jwt = require("jsonwebtoken");
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 router.post(
   "/userLogin",
@@ -21,14 +25,21 @@ router.post(
       const emailId = req.body.email;
       const userData = await User.findOne({ emailId });
 
-      if (!userData) {
+      if (!userData || userData.password !== req.body.password) {
         return res.status(401).json({ error: "Incorrect credentials" });
       }
 
-      if (!(userData.password === req.body.password))
-        return res.status(401).json({ error: "Incorrect credentials" });
+      // Create JWT token with username and high score
+      const tokenPayload = {
+        username: userData.username,
+        highScore: userData.highScore,
+      };
+      // sign and set an expiration (e.g. 1 hour)
+      const token = jwt.sign(tokenPayload, JWT_SECRET, { expiresIn: "2h" });
+
       return res.json({
         success: true,
+        token, // send the token to the client
         username: userData.username,
         highScore: userData.highScore,
       });

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginPage.css";
@@ -35,6 +35,34 @@ const LoginPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const checkTokenAndLogin = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        // Verify token with the server
+        const response = await fetch(`${apiUrl}/api/validateToken`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        if (data && data.success) {
+          login({ username: data.username, highScore: data.highScore });
+          navigate("/game");
+        } else {
+          console.error("Token validation failed");
+        }
+      } catch (error) {
+        console.error("Token validation error:", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkTokenAndLogin();
+  }, []);
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -54,8 +82,9 @@ const LoginPage = () => {
 
       const data = await response.json();
       if (data && data.success) {
-        const { _, username, highScore } = data;
-        //console.log(username, highScore);
+        const { _, token, username, highScore } = data;
+        localStorage.setItem("token", token);
+
         login({ username, highScore });
         navigate("/game");
       } else {
