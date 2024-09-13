@@ -168,6 +168,7 @@ export function useSnakeGameLogic(
       const [head, ...body] = prevState.snake;
       if (
         body.some((part) => part.Xpos === head.Xpos && part.Ypos === head.Ypos)
+        && body.length+1>startSnakeSize
       ) {
         return { ...prevState, isGameOver: true };
       } else {

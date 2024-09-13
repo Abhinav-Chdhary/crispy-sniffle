@@ -35,7 +35,7 @@ export default function GameOver({
     if (newHighScore) {
       handleUpdateHighScore();
     }
-  }, [newHighScore]);
+  }, []);
 
   return (
     <div className='GameOver' style={{ width, height }}>

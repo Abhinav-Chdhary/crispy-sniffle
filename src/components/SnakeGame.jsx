@@ -27,11 +27,9 @@ function SnakeGame({
     percentageWidth,
     startSnakeSize
   );
-
   // Effect to handle keyboard input
   React.useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
-
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
