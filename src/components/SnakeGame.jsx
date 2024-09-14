@@ -1,5 +1,4 @@
 import React from "react";
-import "./SnakeGame.css";
 import GameOver from "./GameOver";
 import { useSnakeGameLogic } from "../util/useSnakeGameLogic";
 
@@ -35,27 +34,14 @@ function SnakeGame({
     };
   }, [handleKeyDown]);
 
-  // // Render the game over screen if the game is over
-  // if (isGameOver) {
-  //   return (
-  //     <GameOver
-  //       width={width}
-  //       height={height}
-  //       highScore={highScore}
-  //       newHighScore={newHighScore}
-  //       score={score}
-  //     />
-  //   );
-  // }
-
   // Render the game board
   return (
     <div
       id='GameBoard'
+      className=' relative m-auto border-2 border-black'
       style={{
-        width: width,
-        height: height,
-        borderWidth: width / 50,
+        width: width+4,
+        height: height+4,
       }}
     >
       {isGameOver ? (
@@ -73,7 +59,7 @@ function SnakeGame({
           {snake.map((snakePart, index) => (
             <div
               key={index}
-              className='Block'
+              className='absolute'
               style={{
                 width: blockWidth,
                 height: blockHeight,
@@ -84,7 +70,7 @@ function SnakeGame({
             />
           ))}
           <div
-            className='Block'
+            className='absolute'
             style={{
               width: blockWidth,
               height: blockHeight,
@@ -93,7 +79,11 @@ function SnakeGame({
               backgroundColor: appleColor,
             }}
           />
-          <div id='Score' style={{ fontSize: width / 20 }}>
+          <div
+            id='Score'
+            className='relative top-full text-center font-bold text-4xl'
+            
+          >
             HIGH-SCORE: {highScore} &emsp; SCORE: {score}
           </div>
         </>

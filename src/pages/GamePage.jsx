@@ -9,9 +9,10 @@ export default function GamePage() {
   return (
     <>
       <Navigation />
-      <h1>
-        Username {auth.user.username}
+      <h1 className='text-4xl text-center font-bold py-2'>
+        Username: {auth.user.username}
       </h1>
+
       <SnakeGame
         snakeColor='green'
         appleColor='red'

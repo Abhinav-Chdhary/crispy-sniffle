@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import "./GameOver.css";
+
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function GameOver({
@@ -29,6 +29,7 @@ export default function GameOver({
       console.log("Failed Update");
     }
   };
+
   useEffect(() => {
     if (newHighScore) {
       handleUpdateHighScore();
@@ -36,11 +37,18 @@ export default function GameOver({
   }, []);
 
   return (
-    <div className='GameOver' style={{ width, height }}>
-      <h1>Game Over</h1>
-      <p>Your score: {score}</p>
-      {newHighScore && <p>New high score: {highScore}!</p>}
-      <p>Press Space to play again</p>
+    <div
+      className={`flex flex-col items-center justify-center bg-gray-800 text-white shadow-lg p-6`}
+      style={{ width: `${width}px`, height: `${height}px` }}
+    >
+      <h1 className="text-4xl font-bold mb-4">Game Over</h1>
+      <p className="text-xl mb-2">Your score: {score}</p>
+      {newHighScore && (
+        <p className="text-2xl text-yellow-400 font-semibold mb-4">
+          New high score: {highScore}!
+        </p>
+      )}
+      <p className="text-lg italic">Press Space to play again</p>
     </div>
   );
 }

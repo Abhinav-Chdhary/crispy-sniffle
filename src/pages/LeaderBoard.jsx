@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Navigation from "../components/Navigation";
-import "./LeaderBoard.css";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function LeaderBoard() {
@@ -25,19 +24,26 @@ export default function LeaderBoard() {
   return (
     <>
       <Navigation />
-      <div className='leaderboard-container'>
-        <h1>LeaderBoard</h1>
+      <div className="max-w-4xl mx-auto my-10 p-4 bg-gray-800 text-white rounded-lg shadow-lg">
+        <h1 className="text-4xl font-bold mb-4 text-center">LeaderBoard</h1>
         {leaders.length > 0 ? (
-          <ul className='leaderboard-list'>
+          <ul className="space-y-4">
             {leaders.map((leader, index) => (
-              <li key={index} className='leaderboard-item'>
-                <span className='leader-username'>{leader.username}</span>:{" "}
-                <span className='leader-score'>{leader.highScore}</span>
+              <li
+                key={index}
+                className="flex justify-between bg-gray-700 p-4 rounded-md shadow-md"
+              >
+                <span className="text-xl font-semibold">{leader.username}</span>
+                <span className="text-xl text-yellow-400">
+                  {leader.highScore}
+                </span>
               </li>
             ))}
           </ul>
         ) : (
-          <p className='no-leaders-message'>Please come back later</p>
+          <p className="text-center text-lg text-gray-400">
+            Please come back later
+          </p>
         )}
       </div>
     </>
