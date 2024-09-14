@@ -71,44 +71,73 @@ export default function SignUpPage() {
   };
 
   return (
-    <>
-      <h1>SIGN UP</h1>
-      <form onSubmit={handleSignUp}>
-        <label>
-          Email:
+    <div className='flex flex-col items-center min-h-screen bg-gray-800 text-white p-4'>
+      <h1 className='text-4xl font-bold mb-4'>SIGN UP</h1>
+      <form
+        onSubmit={handleSignUp}
+        className='bg-gray-700 p-8 rounded-lg shadow-lg max-w-md w-full'
+      >
+        <div className='mb-3'>
+          <label htmlFor='email' className='block text-lg font-semibold mb-2'>
+            Email:
+          </label>
           <input
             type='email'
             id='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className='w-full p-3 rounded-md bg-gray-800 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400'
           />
-          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
-        </label>
+          {errors.email && (
+            <p className='text-red-500 text-sm mt-2'>{errors.email}</p>
+          )}
+        </div>
 
-        <label>
-          Username:
+        <div className='mb-3'>
+          <label
+            htmlFor='username'
+            className='block text-lg font-semibold mb-2'
+          >
+            Username:
+          </label>
           <input
             type='text'
             id='username'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            className='w-full p-3 rounded-md bg-gray-800 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400'
           />
-          {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
-        </label>
+          {errors.username && (
+            <p className='text-red-500 text-sm mt-2'>{errors.username}</p>
+          )}
+        </div>
 
-        <label>
-          Password:
+        <div className='mb-3'>
+          <label
+            htmlFor='password'
+            className='block text-lg font-semibold mb-2'
+          >
+            Password:
+          </label>
           <input
             type='password'
             id='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className='w-full p-3 rounded-md bg-gray-800 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400'
           />
-          {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
-        </label>
+          {errors.password && (
+            <p className='text-red-500 text-sm mt-2'>{errors.password}</p>
+          )}
+        </div>
 
-        <button type='submit'>Submit</button>
+        <button
+          type='submit'
+          className='w-full bg-yellow-400 text-gray-800 font-semibold py-2 rounded-md hover:bg-yellow-500 transition-colors text-lg'
+        >
+          Submit
+        </button>
       </form>
-    </>
+    </div>
   );
 }

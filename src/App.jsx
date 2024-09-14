@@ -8,6 +8,7 @@ import LoginPage from "../src/pages/LoginPage";
 import PrivateRoute from "../src/components/PrivateRoute";
 import SignUpPage from "../src/pages/SignUpPage";
 import TopBanner from "./components/TopBanner";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           />
           <Route path='/about' element={<PrivateRoute component={About} />} />
         </Routes>
+        <Footer/>
       </AuthProvider>
     </Router>
   );

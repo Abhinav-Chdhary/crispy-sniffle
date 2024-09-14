@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import "./LoginPage.css";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const LoginPage = () => {
@@ -97,35 +96,62 @@ const LoginPage = () => {
   };
 
   return (
-    <>
-      <h1>LOGIN</h1>
-      <form onSubmit={handleLogin}>
-        <label>
-          Email:
+    <div className='flex flex-col items-center min-h-screen bg-gray-800 text-white p-4'>
+      <h1 className='text-4xl font-bold mb-2'>LOGIN</h1>
+      <form
+        onSubmit={handleLogin}
+        className='bg-gray-700 p-8 rounded-lg shadow-lg max-w-md w-full'
+      >
+        <div className='mb-6'>
+          <label htmlFor='email' className='block text-lg font-semibold mb-2'>
+            Email:
+          </label>
           <input
             type='email'
             id='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className='w-full p-3 rounded-md bg-gray-800 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400'
           />
-          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
-        </label>
-        <label>
-          Password:
+          {errors.email && (
+            <p className='text-red-500 text-sm mt-2'>{errors.email}</p>
+          )}
+        </div>
+
+        <div className='mb-6'>
+          <label
+            htmlFor='password'
+            className='block text-lg font-semibold mb-2'
+          >
+            Password:
+          </label>
           <input
             type='password'
             id='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className='w-full p-3 rounded-md bg-gray-800 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400'
           />
-          {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
-        </label>
-        <button type='submit'>Login</button>
-        <p>
-          Don't have an account? <Link to={"/signup"}>Sign Up</Link>
+          {errors.password && (
+            <p className='text-red-500 text-sm mt-2'>{errors.password}</p>
+          )}
+        </div>
+
+        <button
+          type='submit'
+          className='text-xl w-full bg-yellow-400 text-gray-800 font-semibold py-2 rounded-md hover:bg-yellow-500 transition-colors'
+        >
+          Login
+        </button>
+
+        <p className='mt-6 text-center text-lg'>
+          Don't have an account?{" "}
+          <Link to='/signup' className='text-yellow-400 hover:underline'>
+            Sign Up
+          </Link>
         </p>
       </form>
-    </>
+    </div>
   );
 };
 
