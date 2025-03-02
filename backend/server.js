@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const app = express();
 const mongoDB = require("./db");
 const cors = require("cors");
+const serverless = require("@stormkit/serverless");
 
 const allowedOrigins = [
   "http://localhost:5173",
@@ -45,4 +46,5 @@ app.use("/api", require("./Routes/validateToken"));
 app.use("/api", require("./Routes/leaderboardList"));
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+//app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+module.exports.handler = serverless(app);
