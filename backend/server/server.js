@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-const mongoDB = require("./db");
+const mongoDB = require("../db");
 const cors = require("cors");
 const serverless = require("@stormkit/serverless");
 
@@ -25,6 +25,16 @@ app.use(
   })
 );
 
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.sendStatus(200);
+});
+
 mongoDB()
   .then(() => {
     console.log("Database connected");
@@ -35,16 +45,16 @@ mongoDB()
 app.use(express.json());
 
 // to create a new user
-app.use("/api", require("./Routes/createNewUser"));
+app.use("/api", require("../Routes/createNewUser"));
 // login a user
-app.use("/api", require("./Routes/loginUser"));
+app.use("/api", require("../Routes/loginUser"));
 // update high score
-app.use("/api", require("./Routes/updateHighScore"));
+app.use("/api", require("../Routes/updateHighScore"));
 // validate token
-app.use("/api", require("./Routes/validateToken"));
+app.use("/api", require("../Routes/validateToken"));
 // get leader board
-app.use("/api", require("./Routes/leaderboardList"));
+app.use("/api", require("../Routes/leaderboardList"));
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
+//app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+module.exports.handler = serverless(app);
